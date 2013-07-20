@@ -2,8 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Book(models.Model):
-    olID = models.IntegerField(primary_key = True)
-    isbn = models.IntegerField()
+    isbn = models.IntegerField(primary_key = True)
 
     def __unicode__(self):
         return "Book ISBN: " + self.olID + " Open Library ID: " + self.olID
