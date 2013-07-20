@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     # url(r'^dbtcore/', include('dbtcore.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^$', include('dbtcore.urls')),
-    url(r'^.*$', include('dbtcore.urls')),
+    url(r'^showoffers/', 'dbtcore.views.showoffers'),
+    url(r'^$', 'dbtcore.views.searchbyisbn'),
 )
