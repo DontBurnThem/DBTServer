@@ -27,8 +27,8 @@ class Offer(models.Model):
     price = models.FloatField()
     lat = models.FloatField()
     lon = models.FloatField()
-    user = models.ForeignKey('User')
-    book = models.ForeignKey('Book')
+    user = models.ForeignKey(User)
+    book = models.ForeignKey(Book)
 
     def __unicode__(self):
         return self.book.title + " for " + str(self.price)
