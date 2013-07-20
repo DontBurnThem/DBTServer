@@ -8,11 +8,17 @@ class User(models.Model):
     fbid = models.IntegerField()
     tel = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return "User " + self.email
+
 class Book(models.Model):
     author = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     edition = models.CharField(max_length=200)
     isbn = models.IntegerField(primary_key = True)
+
+    def __unicode__(self):
+        return self.title + " by " + self.author + ", " + self.edition + " edition."
 
 class Offer(models.Model):
     IMBALLATO = 'I'
@@ -33,8 +39,6 @@ class Offer(models.Model):
     lon = models.FloatField()
     user = models.ForeignKey('User')
     book = models.ForeignKey('Book')
-        
-        
-        
-        
-        
+
+    def __unicode__(self):
+        return self.book.title + " for " + str(self.price)
