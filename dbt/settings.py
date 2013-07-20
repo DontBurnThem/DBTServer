@@ -1,4 +1,5 @@
 # Django settings for dbt project.
+import dj_database_url
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,7 +11,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
+DATABASES = {}
 DATABASES['default'] =  dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
