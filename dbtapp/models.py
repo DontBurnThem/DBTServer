@@ -21,11 +21,11 @@ class Offer(models.Model):
     SCRITTO = 'S'
     DANNEGGIATO = 'D'
     STATUS_CHOICES = (
-        (IMBALLATO, "Imballato")
-        (LETTO, "Letto")
-        (USURATO, "Usurato")
-        (SCRITTO, "Scritto")
-        (DANNEGGIATO, "Danneggiato")
+        (IMBALLATO, "Imballato"),
+        (LETTO, "Letto"),
+        (USURATO, "Usurato"),
+        (SCRITTO, "Scritto"),
+        (DANNEGGIATO, "Danneggiato"),
     )
     status =  models.CharField(max_length=1, choices=STATUS_CHOICES, default=IMBALLATO)
     price = models.FloatField()
