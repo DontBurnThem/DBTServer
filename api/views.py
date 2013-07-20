@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from api.serializers import UserSerializer, BookSerializer, OfferSerializer
-from core.models import User, Book, Offer
+from core.models import Book, Offer
+from django.contrib.auth.models import User
 
 class UserViewSet(viewsets.ModelViewSet):
     """
