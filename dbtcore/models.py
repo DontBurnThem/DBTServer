@@ -2,13 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Book(models.Model):
-    author = models.CharField(max_length=200)
-    title = models.CharField(max_length=200)
-    edition = models.CharField(max_length=200)
-    isbn = models.IntegerField(primary_key = True)
+    olID = models.IntegerField(primary_key = True)
+    isbn = models.IntegerField()
 
     def __unicode__(self):
-        return self.title + " by " + self.author + ", " + self.edition + " edition."
+        return "Book ISBN: " + self.olID + " Open Library ID: " + self.olID
 
 class Offer(models.Model):
     MINT = '1'
