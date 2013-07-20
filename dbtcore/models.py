@@ -5,7 +5,7 @@ class Book(models.Model):
     isbn = models.IntegerField(primary_key = True)
 
     def __unicode__(self):
-        return "Book ISBN: " + self.olID + " Open Library ID: " + self.olID
+        return "Book ISBN: " + self.olID
 
 class Offer(models.Model):
     MINT = '1'
