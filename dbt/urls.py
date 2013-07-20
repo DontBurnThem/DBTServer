@@ -1,17 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
-from api import views
+from api import views as api_views
 
 admin.autodiscover()
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'books', views.BookViewSet)
-router.register(r'offers', views.OfferViewSet)
+router.register(r'users', api_views.UserViewSet)
+router.register(r'books', api_views.BookViewSet)
+router.register(r'offers', api_views.OfferViewSet)
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browseable API.
 urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
     url(r'^api/offers/(?P<method>[a-z]*)/(?P<key>.*)$', api_views.OfferSearchView.as_view()),
