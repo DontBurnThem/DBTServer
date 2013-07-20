@@ -11,19 +11,19 @@ class Book(models.Model):
         return self.title + " by " + self.author + ", " + self.edition + " edition."
 
 class Offer(models.Model):
-    IMBALLATO = 'I'
-    LETTO = 'L'
-    USURATO = 'U'
-    SCRITTO = 'S'
-    DANNEGGIATO = 'D'
+    MINT = '1'
+    OPENED = '2'
+    USED = '3'
+    WRITTEN = '4'
+    DAMAGED = '5'
     STATUS_CHOICES = (
-        (IMBALLATO, "Imballato"),
-        (LETTO, "Letto"),
-        (USURATO, "Usurato"),
-        (SCRITTO, "Scritto"),
-        (DANNEGGIATO, "Danneggiato"),
+        (MINT, "Mint"),
+        (OPENED, "Read"),
+        (USED, "Used"),
+        (WRITTEN, "Written"),
+        (DAMAGED, "Damaged"),
     )
-    status =  models.CharField(max_length=1, choices=STATUS_CHOICES, default=IMBALLATO)
+    status =  models.CharField(max_length=1, choices=STATUS_CHOICES, default=MINT)
     price = models.FloatField()
     lat = models.FloatField()
     lon = models.FloatField()
