@@ -1,18 +1,14 @@
 from django.db import models
-
-# Create your models here.
-
-class User(models.Model):
-    email = models.EmailField()
-    hash = models.CharField(max_length=200)
-    fbid = models.IntegerField()
-    tel = models.CharField(max_length=200)
+from django.contrib.auth.models import User
 
 class Book(models.Model):
     author = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     edition = models.CharField(max_length=200)
     isbn = models.IntegerField(primary_key = True)
+
+    def __unicode__(self):
+        return self.title + " by " + self.author + ", " + self.edition + " edition."
 
 class Offer(models.Model):
     IMBALLATO = 'I'
@@ -31,10 +27,8 @@ class Offer(models.Model):
     price = models.FloatField()
     lat = models.FloatField()
     lon = models.FloatField()
-    user = models.ForeignKey('User')
-    book = models.ForeignKey('Book')
-        
-        
-        
-        
-        
+    user = models.ForeignKey(User)
+    book = models.ForeignKey(Book)
+
+    def __unicode__(self):
+        return self.book.title + " for " + str(self.price)
