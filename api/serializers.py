@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from core.models import Book, Offer
+from dbtcore.models import Book, Offer
 from rest_framework import serializers
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
