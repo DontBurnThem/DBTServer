@@ -14,6 +14,7 @@ router.register(r'offers', views.OfferViewSet)
 # Additionally, we include login URLs for the browseable API.
 urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
+    url(r'^api/offers/(?P<method>[a-z]*)/(?P<key>.*)$', api_views.OfferSearchView.as_view()),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^core/', include('dbtcore.urls')),
