@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from dbtcore.models import Book, Offer
 from rest_framework import serializers
 
-class BookSerializer(serializers.HyperlinkedModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     """Book serializer serializes books"""
     class Meta:
         model = Book
