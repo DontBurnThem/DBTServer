@@ -1,5 +1,5 @@
 from django.contrib import admin
-import dbtapp.models
+from dbtapp.models import Book,Offer,User
 
 admin.site.register(Book)
 admin.site.register(Offer)
