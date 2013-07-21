@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from math import asin, degrees
 
 class LocalOfferManager(models.Manager):
@@ -43,6 +43,8 @@ class DBTUserManager(BaseUserManager):
         """
         u = DBTUser()
         u.email = email
+        u.is_staff = True
+        u.is_superuser = True
         u.set_password(password)
         u.save()
 
@@ -52,16 +54,19 @@ class Book(models.Model):
     def __unicode__(self):
         return "Book ISBN: " + self.isbn
 
-class DBTUser(AbstractBaseUser):
+class DBTUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, db_index=True)
     books = models.ManyToManyField(Book, through='Offer')
+    is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
 
     objects = DBTUserManager()
 
-    def is_active(self):
-        return True
+    def get_short_name(self):
+        return self.email.split('@')[0]
+    def get_full_name(self):
+        return self.email
 
 class Offer(models.Model):
     MINT = '0'
