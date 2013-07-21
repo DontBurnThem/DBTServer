@@ -42,7 +42,7 @@ class Offer(models.Model):
     price = models.FloatField()
     lat = models.FloatField()
     lon = models.FloatField()
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(DBTUser)
     book = models.ForeignKey(Book)
 
     objects = models.Manager()
