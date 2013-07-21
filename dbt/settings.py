@@ -160,6 +160,7 @@ AUTH_USER_MODEL = 'dbtcore.DBTUser'
 
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 FACEBOOK_APP_ID='1374754236080501'
