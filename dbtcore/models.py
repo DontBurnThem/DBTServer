@@ -21,7 +21,7 @@ class LocalOfferManager(models.Manager):
 
 class Book(models.Model):
     isbn = models.CharField(primary_key = True, max_length=13)
-
+    # django.contrib.auth.models.AbstractUser
     def __unicode__(self):
         return "Book ISBN: " + str(self.isbn)
 
@@ -50,3 +50,7 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return "Book ISBN: " + str(self.book.isbn) + " for " + str(self.price) + " credits."
+
+
+
+

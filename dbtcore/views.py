@@ -24,3 +24,5 @@ def register_by_access_token(request, backend, *args, **kwargs):
         login(request, user)
     return redirect('/error/')        # change the destination
 
+def error(request):
+    return render_to_response("dbtcore/error.html")
