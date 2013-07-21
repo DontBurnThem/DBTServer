@@ -25,7 +25,7 @@ class Book(models.Model):
     def __unicode__(self):
         return "Book ISBN: " + self.isbn
 
-class DBTUser(User):
+class DBTUser(models.Model):
     user = models.OneToOneField(User)
     books = models.ManyToManyField(Book, through='Offer')
 
