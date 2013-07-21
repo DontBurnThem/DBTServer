@@ -50,17 +50,3 @@ class OfferSearchView(APIView):
 
         serializer = OfferSerializer(data, many=True)
         return Response(serializer.data)
-
-class OfferGeoSearchView(APIView):
-    """
-        A view that returns a set of offers based on a parameter.
-    """
-
-    http_method_names = ['get',]
-
-    def get(self, request, lat, lon, distance, format=None):
-        """
-        Return a list of all offers around a point
-        """
-        serializer = OfferSerializer(data, many=True)
-        return Response(serializer.data)
