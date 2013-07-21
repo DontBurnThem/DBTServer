@@ -20,7 +20,7 @@ class LocalOfferManager(models.Manager):
                 ).filter(lon__range=(point[1]-d_alpha,point[1]+d_alpha))
 
 class Book(models.Model):
-    isbn = models.IntegerField(primary_key = True)
+    isbn = models.CharField(primary_key = True, max_length=13)
 
     def __unicode__(self):
         return "Book ISBN: " + str(self.isbn)
