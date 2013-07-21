@@ -29,3 +29,5 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return self.book.title + " for " + str(self.price)
+
+
