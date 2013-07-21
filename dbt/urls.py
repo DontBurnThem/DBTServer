@@ -6,7 +6,7 @@ from api import views as api_views
 admin.autodiscover()
 
 router = routers.DefaultRouter()
-router.register(r'users', api_views.UserViewSet)
+router.register(r'users', api_views.DBTUserViewSet)
 router.register(r'books', api_views.BookViewSet)
 router.register(r'offers', api_views.OfferViewSet)
 

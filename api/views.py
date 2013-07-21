@@ -2,16 +2,15 @@ from rest_framework import authentication, permissions, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers import UserSerializer, BookSerializer, OfferSerializer
-from dbtcore.models import Book, Offer
-from django.contrib.auth.models import User
+from api.serializers import DBTUserSerializer, BookSerializer, OfferSerializer
+from dbtcore.models import Book, Offer, DBTUser
 
-class UserViewSet(viewsets.ModelViewSet):
+class DBTUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = DBTUser.objects.all()
+    serializer_class = DBTUserSerializer
 
 class BookViewSet(viewsets.ModelViewSet):
     """
@@ -48,5 +47,5 @@ class OfferSearchView(APIView):
         if 'isbn' in request.QUERY_PARAMS:
             data = data.filter(book__isbn__contains=request.QUERY_PARAMS['isbn'])
 
-        serializer = OfferSerializer(data, many=True)
+        serializer = OfferSerializer(data, many=True, context={'request': request})
         return Response(serializer.data)
