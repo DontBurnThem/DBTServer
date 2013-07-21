@@ -20,10 +20,14 @@ class LocalOfferManager(models.Manager):
                 ).filter(lon__range=(point[1]-d_alpha,point[1]+d_alpha))
 
 class Book(models.Model):
-    isbn = models.CharField(primary_key = True, max_length=13)
+    isbn = models.CharField(primary_key=True, max_length=13)
 
     def __unicode__(self):
         return "Book ISBN: " + self.isbn
+
+class DBTUser(User):
+    user = models.OneToOneField(User)
+    books = models.ManyToManyField(Book, through='Offer')
 
 class Offer(models.Model):
     MINT = '0'
@@ -50,7 +54,3 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return "Book ISBN: " + self.book.isbn + " for " + str(self.price) + " credits."
-
-class DBTUser(User):
-    user = models.OneToOneField(User)
-    books = models.ManyToManyField(Book, through='Offer')
