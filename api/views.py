@@ -48,5 +48,5 @@ class OfferSearchView(APIView):
         if 'isbn' in request.QUERY_PARAMS:
             data = data.filter(book__isbn__contains=request.QUERY_PARAMS['isbn'])
 
-        serializer = OfferSerializer(data, many=True)
+        serializer = OfferSerializer(data, many=True, context={'request': request})
         return Response(serializer.data)
