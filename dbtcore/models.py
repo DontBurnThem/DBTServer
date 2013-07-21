@@ -5,14 +5,14 @@ class Book(models.Model):
     isbn = models.IntegerField(primary_key = True)
 
     def __unicode__(self):
-        return "Book ISBN: " + self.olID
+        return "Book ISBN: " + str(self.isbn)
 
 class Offer(models.Model):
-    MINT = '1'
-    OPENED = '2'
-    USED = '3'
-    WRITTEN = '4'
-    DAMAGED = '5'
+    MINT = '0'
+    OPENED = '1'
+    USED = '2'
+    WRITTEN = '3'
+    DAMAGED = '4'
     STATUS_CHOICES = (
         (MINT, "Mint"),
         (OPENED, "Read"),
@@ -28,6 +28,4 @@ class Offer(models.Model):
     book = models.ForeignKey(Book)
 
     def __unicode__(self):
-        return self.book.title + " for " + str(self.price)
-
-
+        return "Book ISBN: " + str(self.book.isbn) + " for " + str(self.price) + " credits."
