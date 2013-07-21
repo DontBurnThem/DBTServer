@@ -30,7 +30,10 @@ class DBTUserManager(BaseUserManager):
         """
         u = DBTUser()
         u.email = email
-        u.set_password(password)
+        if password is None:
+            u.set_unusable_password()
+        else:
+            u.set_password(password)
         u.save()
 
     def create_superuser(self, email, password):
