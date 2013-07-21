@@ -23,7 +23,7 @@ class Book(models.Model):
     isbn = models.CharField(primary_key = True, max_length=13)
 
     def __unicode__(self):
-        return "Book ISBN: " + str(self.isbn)
+        return "Book ISBN: " + self.isbn
 
 class Offer(models.Model):
     MINT = '0'
@@ -49,4 +49,4 @@ class Offer(models.Model):
     local_objects = LocalOfferManager()
 
     def __unicode__(self):
-        return "Book ISBN: " + str(self.book.isbn) + " for " + str(self.price) + " credits."
+        return "Book ISBN: " + self.book.isbn + " for " + str(self.price) + " credits."
