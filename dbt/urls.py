@@ -12,7 +12,7 @@ router.register(r'offers', api_views.OfferViewSet)
 
 urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
-    url(r'api/offers/', include('api.urls')),
+    url(r'api/offers/search', include('api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^dbtcore/', include('dbtcore.urls')),
     url(r'^admin/', include(admin.site.urls)),

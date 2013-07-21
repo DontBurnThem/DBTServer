@@ -27,18 +27,27 @@ class OfferViewSet(viewsets.ModelViewSet):
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
 
-class OfferIsbnSearchView(APIView):
+class OfferSearchView(APIView):
     """
-        A view that returns a set of offers based on a parameter.
+        A view that returns a set of offers based on some parameters.
     """
 
     http_method_names = ['get',]
 
-    def get(self, request, isbn, format=None):
+    def get(self, request, format=None):
         """
         Return a list of all offers for the given isbn
         """
-        data = Offer.objects.filter(book__isbn=isbn)
+        data = Offer.objects.all()
+        if 'radius' in request.QUERY_PARAMS:
+            if 'll' not in request.QUERY_PARAMS: return Response(status=400)
+            ll = [ float(x) for x in request.QUERY_PARAMS['ll'].split(',') ]
+            if len(ll) != 2: return Response(status=400)
+            data = Offer.local_objects.get_local(ll, float(request.QUERY_PARAMS['radius']))
+
+        if 'isbn' in request.QUERY_PARAMS:
+            data = data.filter(book__isbn__contains=request.QUERY_PARAMS['isbn'])
+
         serializer = OfferSerializer(data, many=True)
         return Response(serializer.data)
 
@@ -53,10 +62,5 @@ class OfferGeoSearchView(APIView):
         """
         Return a list of all offers around a point
         """
-        import math
-        lat, lon, distance = (float(lat), float(lon), float(distance))
-        d_alpha = math.asin(distance/20037)
-        data = Offer.objects.filter(lon__range=(lon-d_alpha,lon+d_alpha)
-                ).filter(lat__range=(lat-d_alpha,lat+d_alpha))
         serializer = OfferSerializer(data, many=True)
         return Response(serializer.data)
