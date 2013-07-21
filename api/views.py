@@ -49,10 +49,14 @@ class OfferGeoSearchView(APIView):
 
     http_method_names = ['get',]
 
-    def get(self, request, lat, lon, format=None):
+    def get(self, request, lat, lon, distance, format=None):
         """
         Return a list of all offers around a point
         """
-        data = Offer.objects.filter(lon)
+        import math
+        lat, lon, distance = (float(lat), float(lon), float(distance))
+        d_alpha = math.asin(distance/20037)
+        data = Offer.objects.filter(lon__range=(lon-d_alpha,lon+d_alpha)
+                ).filter(lat__range=(lat-d_alpha,lat+d_alpha))
         serializer = OfferSerializer(data, many=True)
         return Response(serializer.data)
