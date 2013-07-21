@@ -1,18 +1,18 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
-from api import views as api_views
+import api
 
 admin.autodiscover()
 
 router = routers.DefaultRouter()
-router.register(r'users', api_views.UserViewSet)
-router.register(r'books', api_views.BookViewSet)
-router.register(r'offers', api_views.OfferViewSet)
+router.register(r'users', api.views.UserViewSet)
+router.register(r'books', api.views.BookViewSet)
+router.register(r'offers', api.views.OfferViewSet)
 
 urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
-    url(r'^api/offers/(?P<method>[a-z]*)/(?P<key>.*)$', api_views.OfferSearchView.as_view()),
+    url(r'api/offers/', include('api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^dbtcore/', include('dbtcore.urls')),
     url(r'^admin/', include(admin.site.urls)),

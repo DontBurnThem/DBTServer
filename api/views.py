@@ -27,16 +27,32 @@ class OfferViewSet(viewsets.ModelViewSet):
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
 
-class OfferSearchView(APIView):
+class OfferIsbnSearchView(APIView):
     """
         A view that returns a set of offers based on a parameter.
     """
 
     http_method_names = ['get',]
 
-    def get(self, request, method, key, format=None):
+    def get(self, request, isbn, format=None):
         """
-        Return a list of all offers matching a selected criterion.
+        Return a list of all offers for the given isbn
         """
-        objects = Offer.objects.filter(book__isbn=key)
-        return Response(objects)
+        data = Offer.objects.filter(book__isbn=isbn)
+        serializer = OfferSerializer(data, many=True)
+        return Response(serializer.data)
+
+class OfferGeoSearchView(APIView):
+    """
+        A view that returns a set of offers based on a parameter.
+    """
+
+    http_method_names = ['get',]
+
+    def get(self, request, lat, lon, format=None):
+        """
+        Return a list of all offers around a point
+        """
+        data = Offer.objects.filter(lon)
+        serializer = OfferSerializer(data, many=True)
+        return Response(serializer.data)
