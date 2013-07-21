@@ -156,6 +156,8 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
+AUTH_USER_MODEL = 'dbtcore.DBTUser'
+
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
 )

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from math import asin
 
 class LocalOfferManager(models.Manager):
@@ -19,15 +19,49 @@ class LocalOfferManager(models.Manager):
                 ).filter(lat__range=(point[0]-d_alpha,point[0]+d_alpha)
                 ).filter(lon__range=(point[1]-d_alpha,point[1]+d_alpha))
 
+class DBTUserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        """@todo: Docstring for create_user.
+
+        :email: @todo
+        :password: @todo
+        :returns: @todo
+
+        """
+        u = DBTUser()
+        u.email = email
+        u.set_password(password)
+        u.save()
+
+    def create_superuser(self, email, password):
+        """@todo: Docstring for create_superuser.
+
+        :email: @todo
+        :password: @todo
+        :returns: @todo
+
+        """
+        u = DBTUser()
+        u.email = email
+        u.set_password(password)
+        u.save()
+
 class Book(models.Model):
     isbn = models.CharField(primary_key=True, max_length=13)
 
     def __unicode__(self):
         return "Book ISBN: " + self.isbn
 
-class DBTUser(models.Model):
-    user = models.OneToOneField(User)
+class DBTUser(AbstractBaseUser):
+    email = models.EmailField(unique=True, db_index=True)
     books = models.ManyToManyField(Book, through='Offer')
+
+    USERNAME_FIELD = 'email'
+
+    objects = DBTUserManager()
+
+    def is_active(self):
+        return True
 
 class Offer(models.Model):
     MINT = '0'
