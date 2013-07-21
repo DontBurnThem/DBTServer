@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from math import asin
+from math import asin, degrees
 
 class LocalOfferManager(models.Manager):
     def get_local(self, point, distance):
@@ -11,7 +11,7 @@ class LocalOfferManager(models.Manager):
         :returns: a pre-filtered queryset with local results only
 
         """
-        d_alpha = asin(distance/20037.0) #Get angle from distance 20037 is the
+        d_alpha = degrees(asin(distance/20037.0)) #Get angle from distance 20037 is the
         # Earth radius. The above formula approximates the arc with a triangle
         # side. Could be better, could be worse. It works quite fine for small
         # distances.
