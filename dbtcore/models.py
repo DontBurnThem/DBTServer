@@ -28,4 +28,4 @@ class Offer(models.Model):
     book = models.ForeignKey(Book)
 
     def __unicode__(self):
-        return str(self.book.isbn) + " for " + str(self.price)
+        return "Book ISBN: " + str(self.book.isbn) + " for " + str(self.price) + " credits."
