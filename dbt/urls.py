@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^$', include('dbtcore.urls')),
     url(r'^showoffers/', 'dbtcore.views.showoffers'),
+    url(r'^error/', 'dbtcore.views.error'),
     url(r'^$', 'dbtcore.views.searchbyisbn'),
     url(r'', include('social_auth.urls')),
 )
