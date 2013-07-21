@@ -50,3 +50,7 @@ class Offer(models.Model):
 
     def __unicode__(self):
         return "Book ISBN: " + self.book.isbn + " for " + str(self.price) + " credits."
+
+class DBTUser(User):
+    user = models.OneToOneField(User)
+    books = models.ManyToManyField(Book, through='Offer')
